@@ -57,6 +57,7 @@ jobs:
           name: test-report
           path: build/reports/tests/test/
           retention-days: 7
+          if-no-files-found: ignore
 
   release:
     name: Release & Publish
