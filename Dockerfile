@@ -18,12 +18,15 @@ COPY --from=builder /builder/extracted/application/ ./
 RUN java \
     -XX:ArchiveClassesAtExit=application.jsa \
     -Dspring.context.exit=onRefresh \
+    -Dspring.main.web-application-type=none \
     -Dspring.autoconfigure.exclude=\
 org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration,\
 org.springframework.boot.flyway.autoconfigure.FlywayAutoConfiguration,\
 org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,\
 org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration,\
-org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration \
-    -jar application.jar
+org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration \
+    -jar application.jar || true
 
 ENTRYPOINT ["java", "-XX:SharedArchiveFile=application.jsa", "-jar", "application.jar"]
