@@ -16,7 +16,7 @@ services:
       retries: 5
 
   app:
-    build: .
+    image: ghcr.io/bogomolovvm/flakyhunter:latest
     ports:
       - "8000:8080"
     environment:
