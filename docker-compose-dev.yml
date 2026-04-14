@@ -16,11 +16,11 @@ services:
       retries: 5
 
   app:
-    image: ghcr.io/bogomolovvm/flakyhunter:latest
+    build: .
     ports:
       - "8000:8080"
     environment:
-      SPRING_PROFILES_ACTIVE: prod
+      SPRING_PROFILES_ACTIVE: dev
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/flakyhunter
       SPRING_DATASOURCE_USERNAME: flakyuser
       SPRING_DATASOURCE_PASSWORD: flakypass
